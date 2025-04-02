@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/sign-up.css" />
+    <script src="/scripts/sign-up.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Black+Ops+One&family=Libre+Baskerville:wght@700&family=Pacifico&family=Poppins&family=Public+Sans:wght@700&family=Roboto:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>Sign-up Page</title>
+  </head>
+  <body>
+    <div class="sign-up-form">
+      <div class="details">
+        <div class="top">
+          <h2>Hello!</h2>
+          <p>Please signup to continue</p>
+        </div>
+        <form action="/sign-up" method="post">
+          <div class="user-inputs">
+            <div class="fullname input">
+              <label for="fullname">Fullname</label>
+              <input
+                type="text"
+                id="fullname"
+                name="fullname"
+                placeholder="Kham Japher"
+              />
+            </div>
+            <div class="email input">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="you@example.com"
+              />
+            </div>
+            <div class="phone-number">
+              <label for="phonenumber">Phone number</label>
+              <input
+                type="tel"
+                id="phonenumber"
+                name="phone-number"
+                placeholder="+254700000000"
+              />
+            </div>
+            <div class="password input validate" id="matchpass">
+              <label for="passwordDls">password</label>
+              <input
+                type="password"
+                id="passwordDls"
+                name="password"
+                placeholder="password"
+                required
+              />
+            </div>
+            <div class="confirm-password input validate">
+              <label for="cfrmpassord">confirm password</label>
+              <input
+                type="password"
+                id="cfrmpassord"
+                name="cfrmpassord"
+                placeholder="confirm password"
+                required
+              />
+            </div>
+          </div>
+          <p>Already have an account?</p>
+          <a href="/login">Sign In</a>
+          <button type="submit">Sign Up</button>
+          <%- include("errors.ejs") %>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

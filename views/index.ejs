@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Club Membership</title>
+    <link rel="stylesheet" href="css/home.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="welcome-box">
+        <% if (currentUser) { %>
+        <h2 class="intro">Welcome, <%= currentUser.full_name %>!</h2>
+        <% if (currentUser && currentUser.membership_status !== "admin") { %>
+        <p>
+          🚀 Ready to take charge? Enter the passcode and step into your admin
+          role today!
+        </p>
+        <a href="/passcode">
+          <button class="btn blue">Become Admin</button>
+        </a>
+        <% } else { %>
+        <p>
+          👑 You are already an admin! Manage the club with your new privileges.
+        </p>
+        <% } %>
+        <a href="/create-message">
+          <button class="btn green">Create a New Message</button>
+        </a>
+        <a href="/logout">
+          <button class="btn red">Log Out</button>
+        </a>
+        <% } else { %>
+        <h2>Join Our Club</h2>
+        <p>
+          Become a part of our club to connect, share, and grow together. Sign
+          up or log in to get started!
+        </p>
+        <a href="/sign-up"><button class="btn blue">Sign Up</button></a>
+        <a href="/login"><button class="btn green">Log In</button></a>
+        <% } %>
+      </div>
+
+      <div class="messages">
+        <div class="message-card">
+          <h3>🎉 Welcome to the Club! 🎉</h3>
+          <p>
+            Hey there, and welcome to the exclusive club! 🎊 As the admin, I’m
+            thrilled to have you here. 😊 Here are a few quick rules to keep
+            things awesome: Respect Everyone 🤝, Stay Positive 🌟, Respect
+            Privacy 🔒, No Spamming 🚫, Have Fun! 🎉
+          </p>
+          <% if (!currentUser) { %>
+          <a href="/login">
+            <p class="join-msg">Join the club to see more details!</p>
+          </a>
+          <% } %>
+        </div>
+        <% userMessages.forEach(user => { %>
+        <div class="message-card">
+          <h3><strong>Title:</strong> <%= user.message_title %></h3>
+          <p><strong>Message:</strong> <%= user.message %></p>
+
+          <% if (currentUser) { %>
+          <p class="fullname" style="text-transform: capitalize">
+            <strong>Author:</strong> <%= user.full_name %>
+          </p>
+          <p>
+            <strong>Date:</strong> <%= new
+            Date(user.created_at).toLocaleDateString("en-US", { weekday: 'long',
+            year: 'numeric', month: 'long', day: 'numeric' }) %>
+          </p>
+
+          <% if (currentUser.membership_status === "admin") { %>
+          <form action="/delete-message/<%= user.message_id %>" method="POST">
+            <button class="btn red" type="submit">Delete</button>
+          </form>
+          <% } %> <% } else { %>
+          <a href="/login">
+            <p class="join-msg">Join the club to see more details!</p>
+          </a>
+          <% } %>
+        </div>
+        <% }); %>
+      </div>
+    </div>
+  </body>
+</html>

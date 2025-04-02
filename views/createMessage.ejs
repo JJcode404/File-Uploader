@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create a Message</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f0f2f5;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+      }
+      .header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .header h1 {
+        font-size: 28px;
+        color: #333;
+        margin: 0;
+      }
+      .header p {
+        font-size: 16px;
+        color: #666;
+      }
+      .container {
+        max-width: 500px;
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      .container h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333;
+      }
+      .input-group {
+        width: 100%;
+        margin-bottom: 15px;
+        text-align: left;
+      }
+      label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: #555;
+      }
+      input,
+      textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+        background: #f9f9f9;
+        transition: all 0.3s ease;
+      }
+      input:focus,
+      textarea:focus {
+        border-color: #007bff;
+        outline: none;
+        background: white;
+      }
+      textarea {
+        resize: vertical;
+        height: 120px;
+      }
+      .btn {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 600;
+        color: white;
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        transition: background 0.3s ease;
+      }
+      .btn:hover {
+        background: linear-gradient(135deg, #0056b3, #003f80);
+      }
+      @media (min-width: 1024px) {
+        .container {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>CLUB MESSAGING</h1>
+      <p>Send messages to your fellow club members and stay connected.</p>
+    </div>
+    <div class="container">
+      <h2>Create a New Message</h2>
+      <form action="/create-message" method="post">
+        <div class="input-group">
+          <label for="title">Title</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            placeholder="Enter message title"
+            required
+          />
+        </div>
+        <div class="input-group">
+          <label for="message">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            placeholder="Write your message here..."
+            required
+          ></textarea>
+        </div>
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+    </div>
+  </body>
+</html>

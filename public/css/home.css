@@ -1,0 +1,56 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.container {
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+.intro {
+  text-transform: capitalize;
+}
+.welcome-box,
+.message-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+.btn {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+}
+a {
+  text-decoration: none;
+}
+.blue {
+  background-color: #007bff;
+}
+.green {
+  background-color: #28a745;
+}
+.red {
+  background-color: #dc3545;
+}
+.btn:hover {
+  opacity: 0.9;
+}
+.join-msg {
+  color: #007bff;
+  font-weight: bold;
+  cursor: pointer;
+}
