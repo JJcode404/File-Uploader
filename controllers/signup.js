@@ -1,5 +1,5 @@
 import bcrypt, { compareSync } from "bcryptjs";
-import { pool } from "../db/pool.js";
+import { prisma } from "../seeding.js";
 const singUppage = (req, res) => {
   res.render("sign-up");
 };
@@ -7,11 +7,13 @@ const singUppage = (req, res) => {
 const postUserDetails = async (req, res, next) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    await pool.query(
-      "INSERT INTO users (username, password, full_name,membership_status) VALUES ($1, $2, $3,$4)",
-      [req.body.email, hashedPassword, req.body.fullname, "member"]
-    );
-
+    const addUserToDb = await prisma.user.create({
+      data: {
+        name: req.body.fullname,
+        email: req.body.email,
+        password: hashedPassword,
+      },
+    });
     res.redirect("/login");
   } catch (error) {
     console.error("Error inserting user:", error);

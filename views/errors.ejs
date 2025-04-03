@@ -4,4 +4,8 @@
   <li><%= error.msg %></li>
   <% }); %>
 </ul>
-<% } %>
+<% } %> <% if (locals.error) {%>
+<ul class="errors" style="color: red">
+  <li><%= error%></li>
+  <% } %>
+</ul>
