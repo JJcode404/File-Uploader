@@ -3,17 +3,73 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>File Uploader - Home</title>
+    <link rel="stylesheet" href="/css/home.css" />
+    <script src="script.js" defer></script>
   </head>
   <body>
-    <% if (currentUser) { %>
-    <h1>Welcome User <%= currentUser.name %></h1>
-    <a href="/logout">Log out</a>
-    <% } %> <% if (!currentUser) { %>
-    <h1>Welcome to file_uploader</h1>
-    <a href="/sign-up">
-      <p>Sign up to get started</p>
-    </a>
-    <% } %>
+    <nav class="navbar">
+      <div class="logo">FileUploader</div>
+      <span class="menu-btn" onclick="toggleMenu()">&#9776;</span>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="/login">Log in</a></li>
+        <li><a href="/sign-up">Create account</a></li>
+        <li><a href="#">Contact support</a></li>
+      </ul>
+    </nav>
+
+    <div class="mobile-nav" id="mobileNav">
+      <span class="close-btn" onclick="toggleMenu()">&times;</span>
+      <a href="/">Home</a>
+      <a href="#">FAQ</a>
+      <a href="/login">Log in</a>
+      <a href="/sign-up">Create account</a>
+      <a href="#">Contact support</a>
+    </div>
+
+    <div class="section hero">
+      <img src="/images/upload-icon.svg" alt="File Sharing Icon" />
+      <div>
+        <h1>Effortless File Uploading</h1>
+        <p>
+          Upload, manage, and share your files securely with our fast and
+          reliable file uploader. No more hassle—just seamless file transfers.
+        </p>
+        <a href="/sign-up" class="cta-button">Get Started</a>
+      </div>
+    </div>
+
+    <div class="section security">
+      <img src="/images/upload-icon.svg" alt="File Sharing Icon" />
+
+      <div>
+        <h2>Security You Can Trust</h2>
+        <p>
+          We prioritize your data security with end-to-end encryption, ensuring
+          your files remain safe and protected from unauthorized access.
+        </p>
+      </div>
+    </div>
+
+    <div class="section features">
+      <div>
+        <h2>Download & Share with Ease</h2>
+        <p>
+          Easily download and share files with your friends, colleagues, or
+          clients. Our platform provides seamless access to your stored files
+          anytime, anywhere.
+        </p>
+      </div>
+      <img src="/images/upload-icon.svg" alt="File Sharing Icon" />
+    </div>
+
+    <script>
+      function toggleMenu() {
+        const mobileNav = document.getElementById("mobileNav");
+        mobileNav.classList.toggle("show");
+      }
+    </script>
   </body>
 </html>
