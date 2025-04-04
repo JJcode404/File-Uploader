@@ -3,7 +3,6 @@ import { body, validationResult } from "express-validator";
 const signupValidationErrors = {
   fullnameErr: "must be between 3 and 50 characters.",
   emailErr: "must be a valid email address.",
-  phoneErr: "must be a valid phone number (e.g., +254700000000).",
   passwordErr: "must be at least 6 characters long.",
   confirmPasswordErr: "must match the password.",
 };
@@ -18,11 +17,6 @@ const validateSignup = [
     .trim()
     .isEmail()
     .withMessage(`Email ${signupValidationErrors.emailErr}`),
-
-  body("phone-number")
-    .trim()
-    .matches(/^\+?\d{10,15}$/)
-    .withMessage(`Phone number ${signupValidationErrors.phoneErr}`),
 
   body("password")
     .trim()

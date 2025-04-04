@@ -1,6 +1,9 @@
 import bcrypt, { compareSync } from "bcryptjs";
 import { prisma } from "../seeding.js";
 const singUppage = (req, res) => {
+  if (req.isAuthenticated()) {
+    return res.redirect("/");
+  }
   res.render("sign-up");
 };
 

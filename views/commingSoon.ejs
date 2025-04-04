@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>File Uploader - Home</title>
+    <link rel="stylesheet" href="/css/home.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <%- include('navbar.ejs')%>
+    <div class="coming-soon">
+      <div class="text-content">
+        <span class="badge">Coming Soon</span>
+        <h2>Page Not Available</h2>
+        <p>
+          This page is not available yet, but we are actively working on it. Our
+          upcoming real-time file synchronization feature will let you access
+          your files seamlessly across all devices.
+        </p>
+        <p>Stay tuned for an update!</p>
+      </div>
+      <img src="/images/construction.svg" alt="builder icon" />
+    </div>
+    <%- include('footer.ejs')%>
+    <script>
+      function toggleMenu() {
+        const mobileNav = document.getElementById("mobileNav");
+        mobileNav.classList.toggle("show");
+      }
+    </script>
+  </body>
+</html>

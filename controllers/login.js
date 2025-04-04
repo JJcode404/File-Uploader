@@ -1,6 +1,9 @@
 import { error } from "console";
 import passport from "passport";
 const loginPage = (req, res) => {
+  if (req.isAuthenticated()) {
+    return res.redirect("/");
+  }
   res.render("login");
 };
 
@@ -21,7 +24,6 @@ const authenticateUser = (req, res, next) => {
         console.error("Login error:", loginErr);
         return next(loginErr);
       }
-      console.log("User successfully logged in:", req.user);
       return res.redirect("/");
     });
   })(req, res, next);

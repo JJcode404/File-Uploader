@@ -12,6 +12,7 @@ import { Strategy as LocalStrategy } from "passport-local";
 import { signRouter } from "./routers/signUpRouter.js";
 import { loginRouter } from "./routers/loginRouter.js";
 import { homeRouter } from "./routers/indexRouter.js";
+import { commingSoonRouter } from "./routers/commingSoonRouter.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -89,6 +90,7 @@ app.use((req, res, next) => {
 app.use("/", homeRouter);
 app.use("/sign-up", signRouter);
 app.use("/login", loginRouter);
+app.use("/comming-soon", commingSoonRouter);
 
 app.get("/logout", (req, res, next) => {
   req.logout((err) => {
@@ -107,7 +109,7 @@ app.get("/logout", (req, res, next) => {
       return next(err);
     }
     req.session.destroy(() => {
-      res.redirect("/login");
+      res.redirect("/home");
     });
   });
 });
