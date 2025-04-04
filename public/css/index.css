@@ -1,0 +1,153 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom right, #fff5f0, #ffede7);
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+}
+.sidebar {
+  width: 250px;
+  background: white;
+  border-right: 1px solid #ffd2c0;
+  padding: 2rem 1rem;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease-in-out;
+}
+.sidebar.hidden {
+  transform: translateX(-100%);
+}
+.sidebar h2 {
+  color: #ff7f50;
+  margin-bottom: 2rem;
+  font-weight: 800;
+}
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+.sidebar ul a {
+  text-decoration: none;
+}
+.sidebar li {
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: gray;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.sidebar li:hover,
+.sidebar li.active {
+  color: #ff7f50;
+  font-weight: 600;
+}
+.main {
+  flex: 1;
+  padding: 3rem 1.5rem;
+  position: relative;
+}
+.topbar {
+  position: relative;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+  color: #444;
+  text-align: right;
+}
+.topbar span {
+  font-weight: bold;
+}
+.topbar a {
+  margin-left: 1rem;
+  color: #ff7f50;
+  text-decoration: none;
+  font-weight: bold;
+}
+.topbar a:hover {
+  text-decoration: underline;
+}
+.main h1 {
+  color: #ff7f50;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+.card {
+  background: white;
+  border: 1px solid #ffd2c0;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+.card h2 {
+  color: #ff7f50;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.card p {
+  color: #555;
+}
+.upload-btn {
+  margin-top: 3rem;
+  background: #ff7f50;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.upload-btn:hover {
+  background: #e96d45;
+}
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.menu-toggle {
+  display: none;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: #ff7f50;
+  margin: 1rem;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+  .sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 10;
+    background: white;
+  }
+  .menu-toggle {
+    display: block;
+  }
+  .main {
+    padding: 1.5rem;
+  }
+  .topbar {
+    text-align: left;
+    font-size: 0.9rem;
+  }
+  .main h1 {
+    font-size: 2rem;
+  }
+}

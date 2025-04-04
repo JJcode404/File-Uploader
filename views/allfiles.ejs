@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/allfiles.css" />
+    <title>All Files</title>
+  </head>
+  <body>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menu</button>
+    <div class="container">
+      <%- include('sidebar')%>
+      <main class="main">
+        <div class="topbar">
+          Welcome, <span><%=currentUser.email%></span> |
+          <a href="/logout">Logout</a>
+        </div>
+        <h1>All Files</h1>
+        <div class="file-list" id="fileList">
+          <div class="file">
+            <span class="file-name">Resume.pdf</span>
+            <span class="file-meta">1.2 MB - Uploaded on Mar 29, 2025</span>
+            <button class="delete-btn">Delete</button>
+          </div>
+          <div class="file">
+            <span class="file-name">Presentation.pptx</span>
+            <span class="file-meta">4.8 MB - Uploaded on Mar 27, 2025</span>
+            <button class="delete-btn">Delete</button>
+          </div>
+          <div class="file">
+            <span class="file-name">Notes.txt</span>
+            <span class="file-meta">15 KB - Uploaded on Mar 25, 2025</span>
+            <button class="delete-btn">Delete</button>
+          </div>
+          <div class="file">
+            <span class="file-name">Report.docx</span>
+            <span class="file-meta">980 KB - Uploaded on Mar 20, 2025</span>
+            <button class="delete-btn">Delete</button>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script>
+      function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("hidden");
+      }
+    </script>
+  </body>
+</html>

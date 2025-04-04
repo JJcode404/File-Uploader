@@ -3,21 +3,43 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="stylesheet" href="/css/index.css" />
+    <title>File Uploader</title>
   </head>
   <body>
-    <!DOCTYPE html>
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Dashboard</title>
-      </head>
-      <body>
-        <h1>Welcome, <%= currentUser.name %>!</h1>
-        <p>You are now logged in.</p>
-        <a href="/logout">Log out</a>
-      </body>
-    </html>
+    <button style="color: black" class="menu-toggle" onclick="toggleSidebar()">
+      ☰
+    </button>
+    <div class="container">
+      <%- include('sidebar')%>
+      <main class="main">
+        <div class="topbar">
+          Welcome, <span><%=currentUser.email%></span> |
+          <a href="/logout">Logout</a>
+        </div>
+        <h1>Dashboard</h1>
+        <div class="cards">
+          <div class="card">
+            <h2>Total Files</h2>
+            <p>42 files uploaded</p>
+          </div>
+          <div class="card">
+            <h2>Total Folders</h2>
+            <p>13 folders uploaded</p>
+          </div>
+          <div class="card">
+            <h2>Storage Used</h2>
+            <p>1.2 GB of 10 GB</p>
+          </div>
+        </div>
+        <button class="upload-btn">Upload New File</button>
+        <button class="upload-btn">Upload New Folder</button>
+      </main>
+    </div>
+    <script>
+      function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("hidden");
+      }
+    </script>
   </body>
 </html>
