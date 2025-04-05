@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/sidebar.css" />
+    <title>Upload File - My Drive</title>
+    <style>
+      h1 {
+        color: #ff7f50;
+        margin-bottom: 1.5rem;
+      }
+      form {
+        background: white;
+        padding: 2rem;
+        border: 1px solid #ffd2c0;
+        border-radius: 1rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        max-width: 500px;
+      }
+      label {
+        display: block;
+        margin-top: 1rem;
+        font-weight: bold;
+        color: #444;
+      }
+      .drop-area {
+        border: 2px dashed #ff7f50;
+        border-radius: 0.5rem;
+        padding: 2rem;
+        text-align: center;
+        color: #ff7f50;
+        margin-top: 0.5rem;
+        transition: background 0.3s;
+      }
+      .drop-area.hover {
+        background-color: #ffeae2;
+      }
+      input[type="file"] {
+        display: none;
+      }
+      .browse-btn {
+        margin-top: 1rem;
+        display: inline-block;
+        background-color: #ff7f50;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      select {
+        width: 100%;
+        padding: 0.5rem;
+        margin-top: 0.5rem;
+        border: 1px solid #ffd2c0;
+        border-radius: 0.5rem;
+      }
+      button[type="submit"] {
+        margin-top: 1.5rem;
+        padding: 0.75rem 1.5rem;
+        background-color: #ff7f50;
+        border: none;
+        border-radius: 0.5rem;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      button[type="submit"]:hover {
+        background-color: #ff6333;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+    <div class="container">
+      <%- include('sidebar.ejs')%>
+      <main class="main">
+        <div class="topbar">
+          Welcome, <span><%=currentUser.email%></span> |
+          <a href="#">Logout</a>
+        </div>
+        <h1>Upload a File</h1>
+        <form>
+          <label for="file">Choose or drop a file:</label>
+          <div class="drop-area" id="drop-area" onclick="fileInput.click()">
+            Drop file here or click to browse
+          </div>
+          <input type="file" id="fileInput" name="file" required />
+
+          <label for="folder">Optional folder:</label>
+          <select id="folder" name="folder">
+            <option value="">None</option>
+            <option value="Projects">Projects</option>
+            <option value="Photos">Photos</option>
+            <option value="Work">Work</option>
+            <option value="School">School</option>
+            <option value="Music">Music</option>
+            <option value="Archives">Archives</option>
+          </select>
+
+          <button type="submit">Upload</button>
+        </form>
+      </main>
+    </div>
+    <script>
+      function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("hidden");
+      }
+
+      const fileInput = document.getElementById("fileInput");
+      const dropArea = document.getElementById("drop-area");
+
+      dropArea.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        dropArea.classList.add("hover");
+      });
+
+      dropArea.addEventListener("dragleave", () => {
+        dropArea.classList.remove("hover");
+      });
+
+      dropArea.addEventListener("drop", (e) => {
+        e.preventDefault();
+        dropArea.classList.remove("hover");
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+          fileInput.files = files;
+          dropArea.textContent = files[0].name;
+        }
+      });
+
+      fileInput.addEventListener("change", () => {
+        if (fileInput.files.length > 0) {
+          dropArea.textContent = fileInput.files[0].name;
+        }
+      });
+      function addActiveIndicator(element) {
+        const elementDiv = document.querySelector(`.${element}`);
+        console.log(elementDiv);
+        if (elementDiv) {
+          elementDiv.classList.add("active");
+        }
+      }
+
+      addActiveIndicator("uploadSide");
+    </script>
+  </body>
+</html>

@@ -14,6 +14,9 @@ import { loginRouter } from "./routers/loginRouter.js";
 import { homeRouter } from "./routers/indexRouter.js";
 import { commingSoonRouter } from "./routers/commingSoonRouter.js";
 import { allfilesRouter } from "./routers/allfilesRouter.js";
+import { allfolderRouter } from "./routers/allfolderRouter.js";
+import { uploadFileRouter } from "./routers/uploadFileRouter.js";
+import { uploadFolderRouter } from "./routers/uploadFolderRouter.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -92,7 +95,10 @@ app.use("/", homeRouter);
 app.use("/sign-up", signRouter);
 app.use("/login", loginRouter);
 app.use("/comming-soon", commingSoonRouter);
-app.use("/all-files", allfilesRouter);
+app.use("/files", allfilesRouter);
+app.use("/folders", allfolderRouter);
+app.use("/upload-file", uploadFileRouter);
+app.use("/upload-folder", uploadFolderRouter);
 
 app.get("/logout", (req, res, next) => {
   req.logout((err) => {

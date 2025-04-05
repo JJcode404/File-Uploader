@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/sidebar.css" />
+    <title>Folder List - My Drive</title>
+    <style>
+      .folder-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .folder {
+        background: white;
+        border: 1px solid #ffd2c0;
+        border-radius: 0.75rem;
+        padding: 1rem 1.5rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        min-width: 180px;
+        cursor: pointer;
+      }
+      .folder:hover {
+        background: #fff0e8;
+      }
+      .folder-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1rem;
+      }
+      .folder-buttons button {
+        padding: 0.5rem;
+        background-color: #ff7f50;
+        border: none;
+        border-radius: 0.5rem;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .folder-buttons button:hover {
+        background-color: #ff6333;
+      }
+      .folder-buttons .delete-btn {
+        background-color: #e74c3c;
+      }
+      .folder-buttons .delete-btn:hover {
+        background-color: #c0392b;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+    <div class="container">
+      <%- include('sidebar') %>
+      <main class="main">
+        <div class="topbar">
+          Welcome, <span><%= currentUser.email %></span> |
+          <a href="#">Logout</a>
+        </div>
+        <h1>My Folders</h1>
+        <div class="folder-list">
+          <div class="folder">
+            <p>Projects</p>
+            <div class="folder-buttons">
+              <button>View</button>
+              <button class="delete-btn">Delete</button>
+            </div>
+          </div>
+          <div class="folder">
+            <p>Photos</p>
+            <div class="folder-buttons">
+              <button>View</button>
+              <button class="delete-btn">Delete</button>
+            </div>
+          </div>
+          <div class="folder">
+            <p>Work</p>
+            <div class="folder-buttons">
+              <button>View</button>
+              <button class="delete-btn">Delete</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script>
+      function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("hidden");
+      }
+      function addActiveIndicator(element) {
+        const elementDiv = document.querySelector(`.${element}`);
+        console.log(elementDiv);
+        if (elementDiv) {
+          elementDiv.classList.add("active");
+        }
+      }
+
+      addActiveIndicator("folderSide");
+    </script>
+  </body>
+</html>

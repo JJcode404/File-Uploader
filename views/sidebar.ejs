@@ -2,15 +2,36 @@
   <button class="menu-toggle close" onclick="toggleSidebar()">X</button>
   <h2>My Drive</h2>
   <ul>
-    <a href="/">
-      <li class="active">
-        <img src="/images/layout-dashboard.svg" alt="" /> Dashboard
+    <a class="dashboard-div" href="/">
+      <li>
+        <img src="/images/layout-dashboard.svg" alt="" /><span class="dashboard"
+          >Dashboard</span
+        >
       </li>
     </a>
-    <li><img src="/images/folder.svg" alt="" />My Folders</li>
-    <a href="/all-files">
-      <li><img src="/images/files.svg" alt="" />All Files</li>
+    <a href="/folders">
+      <li>
+        <img src="/images/folder.svg" alt="" />
+        <span class="folderSide">My Folders</span>
+      </li>
     </a>
-    <li><img src="/images/upload.svg" alt="" />Upload File</li>
+    <a class="allfiles" href="/files">
+      <li>
+        <img src="/images/files.svg" alt="" />
+        <span class="fileSide">All Files</span>
+      </li>
+    </a>
+    <a href="/upload-file">
+      <li>
+        <img src="/images/upload.svg" alt="" />
+        <span class="uploadSide">Upload File</span>
+      </li>
+    </a>
+    <a href="/upload-folder">
+      <li>
+        <img src="/images/upload.svg" alt="" />
+        <span class="uploadFolderSide">Create Folder</span>
+      </li>
+    </a>
   </ul>
 </aside>

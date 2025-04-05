@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/index.css" />
-    <title>File Uploader</title>
+    <title>File Uploader - My Drive</title>
   </head>
   <body>
     <button style="color: black" class="menu-toggle" onclick="toggleSidebar()">
@@ -40,6 +40,15 @@
       function toggleSidebar() {
         document.getElementById("sidebar").classList.toggle("hidden");
       }
+      function addActiveIndicator(element) {
+        const elementDiv = document.querySelector(`.${element}`);
+        console.log(elementDiv);
+        if (elementDiv) {
+          elementDiv.classList.add("active");
+        }
+      }
+
+      addActiveIndicator("dashboard");
     </script>
   </body>
 </html>
