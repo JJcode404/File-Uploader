@@ -76,10 +76,8 @@
     <div class="container">
       <%- include('sidebar.ejs')%>
       <main class="main">
-        <div class="topbar">
-          Welcome, <span><%=currentUser.email%></span> |
-          <a href="#">Logout</a>
-        </div>
+        <%- include('welcome.ejs')%>
+
         <h1>Upload a File</h1>
         <form>
           <label for="file">Choose or drop a file:</label>

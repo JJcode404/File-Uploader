@@ -13,10 +13,7 @@
     <div class="container">
       <%- include('sidebar')%>
       <main class="main">
-        <div class="topbar">
-          Welcome, <span><%=currentUser.email%></span> |
-          <a href="/logout">Logout</a>
-        </div>
+        <%- include('welcome.ejs')%>
         <h1>Dashboard</h1>
         <div class="cards">
           <div class="card">

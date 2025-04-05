@@ -49,10 +49,7 @@
     <div class="container">
       <%- include('sidebar.ejs')%>
       <main class="main">
-        <div class="topbar">
-          Welcome, <span><%=currentUser.email%> </span> |
-          <a href="#">Logout</a>
-        </div>
+        <%- include('welcome.ejs')%>
         <h1>Create New Folder</h1>
         <form onsubmit="event.preventDefault(); alert('Folder created!');">
           <label for="folderName">Folder Name:</label>
