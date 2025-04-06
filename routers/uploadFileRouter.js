@@ -10,32 +10,47 @@ uploadFileRouter.get("/", uploadFilePage);
 uploadFileRouter.post("/", upload.single("file"), async (req, res) => {
   try {
     const localFilePath = req.file.path;
-    console.log(localFilePath);
+    const { folderName } = req.body;
+    const userId = req.user.id;
 
     // 1. Upload to Cloudinary
     const result = await cloudinary.uploader.upload(localFilePath, {
       folder: "myapp_files",
       timeout: 80000,
     });
-    console.log(result.secure_url);
 
-    // 2. Save file info to database
+    // console.log("☁️ Cloudinary URL:", result.secure_url);
+    let folderId = undefined;
+    if (folderName) {
+      const folder = await prisma.folder.findFirst({
+        where: {
+          name: folderName,
+          userId,
+        },
+      });
+
+      if (folder) {
+        folderId = folder.id; // Get the folder's ID
+      }
+    }
+    // 3. Save file to database
     const file = await prisma.file.create({
       data: {
-        userId: req.user.id, // assuming you're using auth middleware
+        userId,
         fileName: req.file.originalname,
-        filePath: result.secure_url, // cloud URL
+        filePath: result.secure_url,
         fileType: req.file.mimetype,
         fileSize: req.file.size,
+        folderId: folderId,
       },
     });
 
-    // 3. Delete local file
+    // 4. Delete local file after uploading
     fs.unlinkSync(localFilePath);
 
-    res.status(201).json({ message: "File uploaded!", file });
+    res.status(201).json({ message: "✅ File uploaded!", file });
   } catch (err) {
-    console.error(err);
+    console.error("❌ Upload failed:", err);
     res.status(500).json({ error: "Something went wrong while uploading." });
   }
 });
