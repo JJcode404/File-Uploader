@@ -18,15 +18,15 @@
         <div class="cards">
           <div class="card">
             <h2>Total Files</h2>
-            <p>42 files uploaded</p>
+            <p><%= totalFiles%> files uploaded</p>
           </div>
           <div class="card">
             <h2>Total Folders</h2>
-            <p>13 folders uploaded</p>
+            <p><%= totalFolders%> folders uploaded</p>
           </div>
           <div class="card">
             <h2>Storage Used</h2>
-            <p>1.2 GB of 10 GB</p>
+            <p id="space-used">Computing...</p>
           </div>
         </div>
         <button class="upload-btn">Upload New File</button>
@@ -46,6 +46,19 @@
       }
 
       addActiveIndicator("dashboard");
+
+      fetch("/api/space-used")
+        .then((res) => res.json())
+        .then((data) => {
+          const space = data.spaceUsed;
+          const formatted = (space / (1024 * 1024 * 1024)).toFixed(2); // in GB
+          document.getElementById(
+            "space-used"
+          ).innerText = `${formatted} GB of 25 GB`;
+        })
+        .catch(() => {
+          document.getElementById("space-used").innerText = "Failed to load";
+        });
     </script>
   </body>
 </html>

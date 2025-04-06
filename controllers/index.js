@@ -1,8 +1,22 @@
+import { prisma } from "../seeding.js";
+import { cloudinary } from "../cloudinary.js";
+
 const homePage = async (req, res) => {
   try {
     if (req.user) {
-      // User is logged in, render the index page
-      res.render("index");
+      const totalFiles = await prisma.file.count({
+        where: {
+          userId: req.user.id,
+        },
+      });
+      const totalFolders = await prisma.folder.count({
+        where: {
+          userId: req.user.id,
+        },
+      });
+
+      // const usage = await cloudinary.api.usage();
+      res.render("index", { totalFiles, totalFolders });
     } else {
       // User is not logged in, render the home page
       res.render("home");
@@ -15,4 +29,14 @@ const homePage = async (req, res) => {
   }
 };
 
-export { homePage };
+const getCloudinaryUsage = async (req, res) => {
+  try {
+    const usage = await cloudinary.api.usage({ timeout: 26000 });
+
+    res.json({ spaceUsed: usage.storage.usage });
+  } catch (error) {
+    res.status(404).json({ error: "Failed to fetch Cloudinary usage" });
+  }
+};
+
+export { homePage, getCloudinaryUsage };
