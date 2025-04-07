@@ -16,12 +16,7 @@
       <main class="main">
         <%- include('welcome.ejs')%>
         <h1>Create New Folder</h1>
-        <%- include('uploadLoading.ejs')%> <% if (success && success.length > 0)
-        { %>
-        <div class="flash-success"><%= success %></div>
-        <% } %> <% if (error && error.length > 0) { %>
-        <div class="flash-error"><%= error %></div>
-        <% } %>
+        <%- include('uploadLoading.ejs')%> <%- include('flash.ejs')%>
         <form action="/upload-folder" method="POST">
           <label for="folderName">Folder Name:</label>
           <input

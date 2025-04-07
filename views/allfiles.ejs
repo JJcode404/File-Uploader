@@ -16,11 +16,7 @@
       <main class="main">
         <%- include('welcome.ejs')%>
         <h1>All Files</h1>
-        <% if (success && success.length > 0) { %>
-        <div class="flash-success"><%= success %></div>
-        <% } %> <% if (error && error.length > 0) { %>
-        <div class="flash-error"><%= error %></div>
-        <% } %>
+        <%- include('flash.ejs')%>
         <div class="file-list" id="fileList">
           <% if (files.length === 0) { %>
           <p class="empty-message">
