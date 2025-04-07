@@ -7,9 +7,7 @@
     <title>File Uploader - My Drive</title>
   </head>
   <body>
-    <button style="color: black" class="menu-toggle" onclick="toggleSidebar()">
-      ☰
-    </button>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menu</button>
     <div class="container">
       <%- include('sidebar')%>
       <main class="main">
@@ -56,11 +54,16 @@
         .then((data) => {
           const space = data.spaceUsed;
           const formatted = (space / (1024 * 1024 * 1024)).toFixed(2); // in GB
-          document.getElementById(
-            "space-used"
-          ).innerText = `${formatted} GB of 25 GB`;
+          console.log(formatted);
+          if (!space) {
+            document.getElementById("space-used").innerText = "Failed to load";
+          } else {
+            document.getElementById(
+              "space-used"
+            ).innerText = `${formatted} GB of 25 GB`;
+          }
         })
-        .catch(() => {
+        .catch((error) => {
           document.getElementById("space-used").innerText = "Failed to load";
         });
     </script>

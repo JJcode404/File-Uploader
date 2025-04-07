@@ -31,9 +31,7 @@ body {
 .sidebar ul a {
   text-decoration: none;
 }
-.sidebar.hidden {
-  transform: translateX(-100%);
-}
+
 .sidebar li:hover,
 span.active {
   color: #ff7f50;
@@ -117,6 +115,9 @@ span.active {
   cursor: pointer;
 }
 @media (max-width: 768px) {
+  .sidebar.hidden {
+    transform: translateX(-100%);
+  }
   .container {
     flex-direction: column;
   }

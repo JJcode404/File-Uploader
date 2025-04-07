@@ -19,9 +19,6 @@ body {
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease-in-out;
 }
-.sidebar.hidden {
-  transform: translateX(-100%);
-}
 .sidebar h2 {
   color: #ff7f50;
   margin-bottom: 2rem;
@@ -128,6 +125,9 @@ span.active {
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
+  }
+  .sidebar.hidden {
+    transform: translateX(-100%);
   }
   .sidebar {
     position: absolute;
