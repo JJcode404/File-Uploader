@@ -16,10 +16,10 @@ uploadFileRouter.post("/", upload.single("file"), async (req, res) => {
     // 1. Upload to Cloudinary
     const result = await cloudinary.uploader.upload(localFilePath, {
       folder: "myapp_files",
-      timeout: 80000,
+      timeout: 26000,
     });
 
-    // console.log("☁️ Cloudinary URL:", result.secure_url);
+    console.log("☁️ Cloudinary URL:", result.secure_url);
     let folderId = undefined;
     if (folderName) {
       const folder = await prisma.folder.findFirst({
@@ -48,10 +48,12 @@ uploadFileRouter.post("/", upload.single("file"), async (req, res) => {
     // 4. Delete local file after uploading
     fs.unlinkSync(localFilePath);
 
-    res.status(201).json({ message: "✅ File uploaded!", file });
+    req.flash("success", "✅ File uploaded successfully!");
+    res.redirect("/upload-file");
   } catch (err) {
     console.error("❌ Upload failed:", err);
-    res.status(500).json({ error: "Something went wrong while uploading." });
+    req.flash("error", "❌ File uploaded failed! try again later");
+    res.redirect("/upload-file");
   }
 });
 

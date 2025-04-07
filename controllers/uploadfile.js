@@ -1,5 +1,20 @@
-const uploadFilePage = (req, res) => {
-  res.render("uploadFile");
+import { prisma } from "../seeding.js";
+
+const uploadFilePage = async (req, res) => {
+  try {
+    const foldersName = await prisma.folder.findMany({
+      where: {
+        userId: req.user.id,
+      },
+      select: {
+        name: true,
+      },
+    });
+    res.render("uploadFile", { foldersName });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ error: "Failed to fetch all folders" });
+  }
 };
 
 export { uploadFilePage };

@@ -2,7 +2,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import express from "express";
 import bcrypt from "bcryptjs";
-import flash from "connect-flash";
+import flash from "express-flash";
 import expressSession from "express-session";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import { PrismaClient } from "@prisma/client";
@@ -44,6 +44,13 @@ app.use(
     }),
   })
 );
+app.use(flash());
+
+app.use((req, res, next) => {
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  next();
+});
 passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {

@@ -4,53 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/sidebar.css" />
+    <link rel="stylesheet" href="/css/success&error.css" />
+    <link rel="stylesheet" href="/css/uploadfolders.css" />
+
     <title>Create Folder - My Drive</title>
-    <style>
-      form {
-        background: white;
-        padding: 2rem;
-        border: 1px solid #ffd2c0;
-        border-radius: 1rem;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-        max-width: 500px;
-      }
-      label {
-        display: block;
-        margin-top: 1rem;
-        font-weight: bold;
-        color: #444;
-      }
-      input[type="text"] {
-        width: 100%;
-        padding: 0.5rem;
-        margin-top: 0.5rem;
-        border: 1px solid #ffd2c0;
-        border-radius: 0.5rem;
-      }
-      button[type="submit"] {
-        margin-top: 1.5rem;
-        padding: 0.75rem 1.5rem;
-        background-color: #ff7f50;
-        border: none;
-        border-radius: 0.5rem;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-      }
-      button[type="submit"]:hover {
-        background-color: #ff6333;
-      }
-    </style>
   </head>
   <body>
-    <button style="color: black" class="menu-toggle" onclick="toggleSidebar()">
-      ☰
-    </button>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
     <div class="container">
       <%- include('sidebar.ejs')%>
       <main class="main">
         <%- include('welcome.ejs')%>
         <h1>Create New Folder</h1>
+        <%- include('uploadLoading.ejs')%> <% if (success && success.length > 0)
+        { %>
+        <div class="flash-success"><%= success %></div>
+        <% } %> <% if (error && error.length > 0) { %>
+        <div class="flash-error"><%= error %></div>
+        <% } %>
         <form action="/upload-folder" method="POST">
           <label for="folderName">Folder Name:</label>
           <input
@@ -78,6 +49,28 @@
       }
 
       addActiveIndicator("uploadFolderSide");
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const flashMessages = document.querySelectorAll(
+          ".flash-success, .flash-error"
+        );
+        flashMessages.forEach((msg) => {
+          setTimeout(() => {
+            msg.style.display = "none";
+          }, 4000);
+        });
+      });
+      document.querySelector("form").addEventListener("submit", function () {
+        // Show SVG animation
+        document.getElementById("upload-animation").style.display = "block";
+
+        // Optional: Hide any existing flash messages immediately
+        document
+          .querySelectorAll(".flash-success, .flash-error")
+          .forEach((msg) => {
+            msg.style.display = "none";
+          });
+      });
     </script>
   </body>
 </html>

@@ -1,0 +1,53 @@
+.flash-success,
+.flash-error {
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  font-weight: 500;
+  color: #fff;
+  animation: fadeInSlide 0.4s ease-in-out;
+}
+
+.flash-success {
+  background-color: #28a745;
+  border-left: 6px solid #218838;
+}
+
+.flash-error {
+  background-color: #dc3545;
+  border-left: 6px solid #bd2130;
+}
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+#upload-animation {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  display: none;
+}
+
+#upload-animation svg {
+  animation: bounce 1s infinite ease-in-out;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}

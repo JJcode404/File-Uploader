@@ -15,9 +15,8 @@ uploadFolderRouter.post("/", async (req, res) => {
       },
     });
 
-    return res
-      .status(201)
-      .json({ message: "✅ Folder created successfully!", folder });
+    req.flash("success", "✅ Folder uploaded successfully!");
+    res.redirect("/upload-folder");
   } catch (error) {
     console.error("❌ Failed to create folder:", error.message);
     return res
