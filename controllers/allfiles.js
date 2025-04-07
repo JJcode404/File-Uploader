@@ -14,4 +14,52 @@ const allfilesPage = async (req, res) => {
   }
 };
 
-export { allfilesPage };
+const deleteFile = async (req, res) => {
+  try {
+    const fileId = req.params.id;
+
+    const file = await prisma.file.findUnique({
+      where: { id: fileId },
+    });
+
+    if (!file || file.userId !== req.user.id) {
+      return res
+        .status(403)
+        .json({ error: "Not authorized to delete this file" });
+    }
+
+    await prisma.file.delete({
+      where: { id: fileId },
+    });
+
+    req.flash("success", "✅ File deleted successfully!");
+    res.redirect("/files");
+  } catch (error) {
+    console.error("❌ Upload failed:", err);
+    req.flash("error", "❌ File deletion failed!");
+    res.redirect("/files");
+  }
+};
+
+const downloadFile = async (req, res) => {
+  try {
+    const fileId = req.params.id;
+
+    const file = await prisma.file.findUnique({
+      where: { id: fileId },
+    });
+
+    if (file.userId !== req.user.id) {
+      req.flash("error", "❌ Not authorized to download this file!");
+      res.redirect("/files");
+    }
+
+    const forceDownloadUrl = file.filePath + "?fl_attachment=true";
+    res.redirect(forceDownloadUrl);
+  } catch (error) {
+    req.flash("error", "❌ Failed to download file!");
+    res.redirect("/files");
+  }
+};
+
+export { allfilesPage, deleteFile, downloadFile };

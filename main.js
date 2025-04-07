@@ -17,6 +17,7 @@ import { allfilesRouter } from "./routers/allfilesRouter.js";
 import { allfolderRouter } from "./routers/allfolderRouter.js";
 import { uploadFileRouter } from "./routers/uploadFileRouter.js";
 import { uploadFolderRouter } from "./routers/uploadFolderRouter.js";
+import { deleteFile, downloadFile } from "./controllers/allfiles.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -106,6 +107,8 @@ app.use("/files", allfilesRouter);
 app.use("/folders", allfolderRouter);
 app.use("/upload-file", uploadFileRouter);
 app.use("/upload-folder", uploadFolderRouter);
+app.use("/delete-file/:id", deleteFile);
+app.use("/download-file/:id", downloadFile);
 
 app.get("/logout", (req, res, next) => {
   req.logout((err) => {

@@ -16,7 +16,7 @@ uploadFileRouter.post("/", upload.single("file"), async (req, res) => {
     // 1. Upload to Cloudinary
     const result = await cloudinary.uploader.upload(localFilePath, {
       folder: "myapp_files",
-      timeout: 26000,
+      timeout: 8000,
     });
 
     console.log("☁️ Cloudinary URL:", result.secure_url);

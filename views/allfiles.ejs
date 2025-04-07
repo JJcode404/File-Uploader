@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/sidebar.css" />
     <link rel="stylesheet" href="/css/allfiles.css" />
+    <link rel="stylesheet" href="/css/success&error.css" />
+
     <title>All Files - My Drive</title>
   </head>
   <body>
@@ -14,6 +16,11 @@
       <main class="main">
         <%- include('welcome.ejs')%>
         <h1>All Files</h1>
+        <% if (success && success.length > 0) { %>
+        <div class="flash-success"><%= success %></div>
+        <% } %> <% if (error && error.length > 0) { %>
+        <div class="flash-error"><%= error %></div>
+        <% } %>
         <div class="file-list" id="fileList">
           <% files.forEach(file => { %>
           <div class="file">
@@ -24,10 +31,16 @@
               'numeric', month: 'short', day: 'numeric' }) %>
             </span>
             <div class="action">
-              <a href="#"><button class="delete-btn">Delete</button></a>
-              <a href="#"
-                ><img src="/images/download.svg" alt="dowload button icon"
-              /></a>
+              <form action="/delete-file/<%= file.id %>" method="POST">
+                <button class="delete-btn" type="submit">Delete</button>
+              </form>
+              <form action="/download-file/<%= file.id %>" method="POST">
+                <input
+                  type="image"
+                  src="/images/download.svg"
+                  alt="Download button icon"
+                />
+              </form>
             </div>
           </div>
           <% }); %>
@@ -47,6 +60,24 @@
       }
 
       addActiveIndicator("fileSide");
+      document.addEventListener("DOMContentLoaded", () => {
+        const flashMessages = document.querySelectorAll(
+          ".flash-success, .flash-error"
+        );
+        flashMessages.forEach((msg) => {
+          setTimeout(() => {
+            msg.style.display = "none";
+          }, 4000);
+        });
+      });
+      document.querySelector("form").addEventListener("submit", function () {
+        document.getElementById("upload-animation").style.display = "block";
+        document
+          .querySelectorAll(".flash-success, .flash-error")
+          .forEach((msg) => {
+            msg.style.display = "none";
+          });
+      });
     </script>
   </body>
 </html>
