@@ -23,9 +23,8 @@ const deleteFile = async (req, res) => {
     });
 
     if (!file || file.userId !== req.user.id) {
-      return res
-        .status(403)
-        .json({ error: "Not authorized to delete this file" });
+      req.flash("error", "❌ Not authorized to download this file!");
+      res.redirect("/files");
     }
 
     await prisma.file.delete({

@@ -15,18 +15,24 @@
         <%- include('welcome.ejs')%>
         <h1>My Folders</h1>
         <div class="folder-list">
-          <% folders.forEach(folder => { %>
+          <% if (folders.length === 0) { %>
+          <p>No folders found. Create one to view it here. 📁</p>
+          <% } else { %> <% folders.forEach(folder => { %>
           <div class="folder">
             <p><%= folder.name %></p>
-            <p>
+            <p class="empty-message">
               Created on: <%= new Date(folder.createdAt).toLocaleDateString() %>
             </p>
             <div class="folder-buttons">
-              <button>View</button>
-              <button class="delete-btn">Delete</button>
+              <form action="/view/folder/<%= folder.id %>" method="post">
+                <button type="submit">View</button>
+              </form>
+              <form action="/delete-folder/<%= folder.id %>">
+                <button class="delete-btn" type="submit">Delete</button>
+              </form>
             </div>
           </div>
-          <% }); %>
+          <% }); %> <% } %>
         </div>
       </main>
     </div>

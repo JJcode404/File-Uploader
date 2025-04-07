@@ -22,7 +22,11 @@
         <div class="flash-error"><%= error %></div>
         <% } %>
         <div class="file-list" id="fileList">
-          <% files.forEach(file => { %>
+          <% if (files.length === 0) { %>
+          <p class="empty-message">
+            You haven’t uploaded any files yet. Upload some to see them here. 📄
+          </p>
+          <% } else { %> <% files.forEach(file => { %>
           <div class="file">
             <span class="file-name"><%= file.fileName %></span>
             <span class="file-meta">
@@ -43,7 +47,7 @@
               </form>
             </div>
           </div>
-          <% }); %>
+          <% }); %> <% } %>
         </div>
       </main>
     </div>
