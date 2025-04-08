@@ -66,8 +66,52 @@
     margin: 0;
   }
 }
+
 .action {
   display: flex;
   align-items: center;
   gap: 16px;
+}
+
+.delete-btn {
+  background-color: #ff4d4f;
+  border: none;
+  color: white;
+  padding: 5px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.download-icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+@media (min-width: 600px) {
+  .file-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    flex-wrap: wrap;
+  }
+
+  .file-name {
+    flex: 2 1 0;
+    min-width: 150px;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .file-meta {
+    flex: 3 1 0;
+    min-width: 200px;
+    font-size: 0.9rem;
+    color: #666;
+    white-space: nowrap;
+  }
 }

@@ -6,7 +6,6 @@ uploadFolderRouter.get("/", uploadFolderPage);
 uploadFolderRouter.post("/", async (req, res) => {
   try {
     const { folderName } = req.body;
-    console.log(req.body);
 
     const folder = await prisma.folder.create({
       data: {
