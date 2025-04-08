@@ -18,7 +18,9 @@
         <%- include('flash.ejs')%>
         <div class="folder-list">
           <% if (folders.length === 0) { %>
-          <p>No folders found. Create one to view it here. 📁</p>
+          <p class="empty-message">
+            No folders found. Create one to view it here. 📁
+          </p>
           <% } else { %> <% folders.forEach(folder => { %>
           <div class="folder">
             <p><%= folder.name %></p>

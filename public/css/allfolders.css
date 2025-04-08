@@ -38,3 +38,11 @@
 .folder-buttons .delete-btn:hover {
   background-color: #c0392b;
 }
+.empty-message {
+  width: 100%;
+  background: white;
+  border: 1px solid #ffd2c0;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
