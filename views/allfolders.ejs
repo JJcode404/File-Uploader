@@ -24,7 +24,7 @@
           <% } else { %> <% folders.forEach(folder => { %>
           <div class="folder">
             <p><%= folder.name %></p>
-            <p class="empty-message">
+            <p>
               Created on: <%= new Date(folder.createdAt).toLocaleDateString() %>
             </p>
             <div class="folder-buttons">
@@ -61,14 +61,6 @@
             msg.style.display = "none";
           }, 4000);
         });
-      });
-      document.querySelector("form").addEventListener("submit", function () {
-        document.getElementById("upload-animation").style.display = "block";
-        document
-          .querySelectorAll(".flash-success, .flash-error")
-          .forEach((msg) => {
-            msg.style.display = "none";
-          });
       });
     </script>
   </body>

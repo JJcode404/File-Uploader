@@ -60,24 +60,6 @@
       }
 
       addActiveIndicator("fileSide");
-      document.addEventListener("DOMContentLoaded", () => {
-        const flashMessages = document.querySelectorAll(
-          ".flash-success, .flash-error"
-        );
-        flashMessages.forEach((msg) => {
-          setTimeout(() => {
-            msg.style.display = "none";
-          }, 4000);
-        });
-      });
-      document.querySelector("form").addEventListener("submit", function () {
-        document.getElementById("upload-animation").style.display = "block";
-        document
-          .querySelectorAll(".flash-success, .flash-error")
-          .forEach((msg) => {
-            msg.style.display = "none";
-          });
-      });
     </script>
   </body>
 </html>
