@@ -56,6 +56,7 @@ uploadFileRouter.post(
       req.flash("success", "✅ File uploaded successfully!");
       res.redirect("/upload-file");
     } catch (err) {
+      fs.unlinkSync(localFilePath);
       console.error("❌ Upload failed:", err);
       req.flash("error", "❌ File uploaded failed! try again later");
       res.redirect("/upload-file");
