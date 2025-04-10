@@ -19,8 +19,6 @@ import { uploadFolderRouter } from "./routers/uploadFolderRouter.js";
 import { deleteFile, downloadFile } from "./controllers/allfiles.js";
 import { deleteFolder, viewFolderFiles } from "./controllers/allfolders.js";
 
-import { PrismaClient } from "@prisma/client";
-
 const prisma = new PrismaClient();
 
 const __filename = fileURLToPath(import.meta.url);
