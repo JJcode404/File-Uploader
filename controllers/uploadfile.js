@@ -15,6 +15,8 @@ const uploadFilePage = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(404).json({ error: "Failed to fetch all folders" });
+  } finally {
+    await prisma.$disconnect();
   }
 };
 

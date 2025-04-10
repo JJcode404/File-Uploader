@@ -23,6 +23,9 @@ const postUserDetails = async (req, res, next) => {
   } catch (error) {
     console.error("Error inserting user:", error);
     next(error);
+  } finally {
+    // Disconnect Prisma client after the operation is completed
+    await prisma.$disconnect();
   }
 };
 

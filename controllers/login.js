@@ -1,4 +1,3 @@
-import { error } from "console";
 import passport from "passport";
 const loginPage = (req, res) => {
   if (req.isAuthenticated()) {

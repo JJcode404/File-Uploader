@@ -38,6 +38,8 @@ const getCloudinaryUsage = async (req, res) => {
     res.json({ spaceUsed: usage.storage.usage });
   } catch (error) {
     res.status(404).json({ error: "Failed to fetch Cloudinary usage" });
+  } finally {
+    await prisma.$disconnect();
   }
 };
 

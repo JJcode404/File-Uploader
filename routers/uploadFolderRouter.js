@@ -23,6 +23,8 @@ uploadFolderRouter.post("/", async (req, res) => {
     return res
       .status(500)
       .json({ error: "Server error. Failed to create folder." });
+  } finally {
+    await prisma.$disconnect();
   }
 });
 

@@ -73,6 +73,8 @@ passport.use(
       return done(null, user);
     } catch (err) {
       return done(err);
+    } finally {
+      await prisma.$disconnect();
     }
   })
 );
@@ -90,6 +92,8 @@ passport.deserializeUser(async (id, done) => {
     done(null, user);
   } catch (err) {
     done(err);
+  } finally {
+    await prisma.$disconnect();
   }
 });
 

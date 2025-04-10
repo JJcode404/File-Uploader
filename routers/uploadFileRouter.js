@@ -62,6 +62,8 @@ uploadFileRouter.post(
       console.error("❌ Upload failed:", err);
       req.flash("error", "❌ File uploaded failed! try again later");
       res.redirect("/upload-file");
+    } finally {
+      await prisma.$disconnect();
     }
   }
 );

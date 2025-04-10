@@ -59,6 +59,8 @@ const downloadFile = async (req, res) => {
   } catch (error) {
     req.flash("error", "❌ Failed to download file!");
     res.redirect("/files");
+  } finally {
+    await prisma.$disconnect();
   }
 };
 

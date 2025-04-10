@@ -52,6 +52,8 @@ const viewFolderFiles = async (req, res) => {
     console.error("❌ Upload failed:", err);
     req.flash("error", "❌ Folder deletion failed!");
     res.redirect("/folders");
+  } finally {
+    await prisma.$disconnect();
   }
 };
 
