@@ -1,5 +1,7 @@
 import bcrypt, { compareSync } from "bcryptjs";
-import { prisma } from "../seeding.js";
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
+
 const singUppage = (req, res) => {
   if (req.isAuthenticated()) {
     return res.redirect("/");
