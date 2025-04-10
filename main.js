@@ -6,7 +6,6 @@ import flash from "express-flash";
 import expressSession from "express-session";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import { PrismaClient } from "@prisma/client";
-import { prisma } from "./seeding.js";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { signRouter } from "./routers/signUpRouter.js";
@@ -19,6 +18,10 @@ import { uploadFileRouter } from "./routers/uploadFileRouter.js";
 import { uploadFolderRouter } from "./routers/uploadFolderRouter.js";
 import { deleteFile, downloadFile } from "./controllers/allfiles.js";
 import { deleteFolder, viewFolderFiles } from "./controllers/allfolders.js";
+
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
