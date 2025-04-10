@@ -20,8 +20,15 @@ const uploadFilePage = async (req, res) => {
 };
 
 const uploadFile = async (req, res) => {
-  const localFilePath = req.file.path;
+  if (!req.file) {
+    console.error("❌ No file uploaded!");
+    req.flash("error", "❌ No file uploaded! Please try again.");
+    return res.redirect("/upload-file");
+  }
+
+  let localFilePath;
   try {
+    localFilePath = req.file.path;
     const { folderName } = req.body;
     const userId = req.user.id;
 
@@ -45,6 +52,7 @@ const uploadFile = async (req, res) => {
         folderId = folder.id; // Get the folder's ID
       }
     }
+
     // 3. Save file to database
     const file = await prisma.file.create({
       data: {
@@ -63,9 +71,12 @@ const uploadFile = async (req, res) => {
     req.flash("success", "✅ File uploaded successfully!");
     res.redirect("/upload-file");
   } catch (err) {
-    fs.unlinkSync(localFilePath);
+    if (localFilePath) {
+      console.log(localFilePath);
+      fs.unlinkSync(localFilePath);
+    }
     console.error("❌ Upload failed:", err);
-    req.flash("error", "❌ File uploaded failed! try again later");
+    req.flash("error", "❌ File upload failed! Try again later");
     res.redirect("/upload-file");
   }
 };

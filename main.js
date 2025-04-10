@@ -140,15 +140,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () =>
   console.log(`FILE UPLOADER - listening on port ${PORT}!`)
 );
-
-process.on("SIGINT", async () => {
-  console.log("SIGINT received. Disconnecting Prisma...");
-  await prisma.$disconnect();
-  process.exit(0);
-});
-
-process.on("SIGTERM", async () => {
-  console.log("SIGTERM received. Disconnecting Prisma...");
-  await prisma.$disconnect();
-  process.exit(0);
-});
