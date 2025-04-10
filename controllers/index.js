@@ -1,6 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
-
+import { prisma } from "../prisma.js";
 import { cloudinary } from "../cloudinary.js";
 
 const homePage = async (req, res) => {
@@ -38,8 +36,6 @@ const getCloudinaryUsage = async (req, res) => {
     res.json({ spaceUsed: usage.storage.usage });
   } catch (error) {
     res.status(404).json({ error: "Failed to fetch Cloudinary usage" });
-  } finally {
-    await prisma.$disconnect();
   }
 };
 

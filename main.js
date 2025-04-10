@@ -6,6 +6,7 @@ import flash from "express-flash";
 import expressSession from "express-session";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import { PrismaClient } from "@prisma/client";
+import { prisma } from "./prisma.js";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { signRouter } from "./routers/signUpRouter.js";
@@ -18,8 +19,7 @@ import { uploadFileRouter } from "./routers/uploadFileRouter.js";
 import { uploadFolderRouter } from "./routers/uploadFolderRouter.js";
 import { deleteFile, downloadFile } from "./controllers/allfiles.js";
 import { deleteFolder, viewFolderFiles } from "./controllers/allfolders.js";
-
-const prisma = new PrismaClient();
+import { isModifierLike } from "typescript";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -73,8 +73,6 @@ passport.use(
       return done(null, user);
     } catch (err) {
       return done(err);
-    } finally {
-      await prisma.$disconnect();
     }
   })
 );
@@ -92,8 +90,6 @@ passport.deserializeUser(async (id, done) => {
     done(null, user);
   } catch (err) {
     done(err);
-  } finally {
-    await prisma.$disconnect();
   }
 });
 
@@ -144,3 +140,15 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () =>
   console.log(`FILE UPLOADER - listening on port ${PORT}!`)
 );
+
+process.on("SIGINT", async () => {
+  console.log("SIGINT received. Disconnecting Prisma...");
+  await prisma.$disconnect();
+  process.exit(0);
+});
+
+process.on("SIGTERM", async () => {
+  console.log("SIGTERM received. Disconnecting Prisma...");
+  await prisma.$disconnect();
+  process.exit(0);
+});

@@ -1,5 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import { prisma } from "../prisma.js";
 
 const allfolderPage = async (req, res) => {
   try {
@@ -52,8 +51,6 @@ const viewFolderFiles = async (req, res) => {
     console.error("❌ Upload failed:", err);
     req.flash("error", "❌ Folder deletion failed!");
     res.redirect("/folders");
-  } finally {
-    await prisma.$disconnect();
   }
 };
 

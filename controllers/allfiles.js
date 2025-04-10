@@ -1,5 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import { prisma } from "../prisma.js";
 
 const allfilesPage = async (req, res) => {
   try {
@@ -59,8 +58,6 @@ const downloadFile = async (req, res) => {
   } catch (error) {
     req.flash("error", "❌ Failed to download file!");
     res.redirect("/files");
-  } finally {
-    await prisma.$disconnect();
   }
 };
 

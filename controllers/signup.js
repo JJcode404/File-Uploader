@@ -1,6 +1,5 @@
 import bcrypt, { compareSync } from "bcryptjs";
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import { prisma } from "../prisma.js";
 
 const singUppage = (req, res) => {
   if (req.isAuthenticated()) {
@@ -23,9 +22,6 @@ const postUserDetails = async (req, res, next) => {
   } catch (error) {
     console.error("Error inserting user:", error);
     next(error);
-  } finally {
-    // Disconnect Prisma client after the operation is completed
-    await prisma.$disconnect();
   }
 };
 
