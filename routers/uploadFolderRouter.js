@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { uploadFolderPage } from "../controllers/uploadFolder.js";
-import { prisma } from "../seeding.js";
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
+
 const uploadFolderRouter = Router();
 uploadFolderRouter.get("/", uploadFolderPage);
 uploadFolderRouter.post("/", async (req, res) => {

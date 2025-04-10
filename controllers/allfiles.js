@@ -1,4 +1,5 @@
-import { prisma } from "../seeding.js";
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
 
 const allfilesPage = async (req, res) => {
   try {

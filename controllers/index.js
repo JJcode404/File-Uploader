@@ -1,4 +1,6 @@
-import { prisma } from "../seeding.js";
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
+
 import { cloudinary } from "../cloudinary.js";
 
 const homePage = async (req, res) => {

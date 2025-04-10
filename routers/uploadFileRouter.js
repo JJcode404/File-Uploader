@@ -1,10 +1,12 @@
 import { Router } from "express";
 import { upload } from "../controllers/generalUpload.js";
-import { prisma } from "../seeding.js";
 import fs from "fs";
 import { cloudinary } from "../cloudinary.js";
 import { uploadFilePage } from "../controllers/uploadfile.js";
 import { validateFileUpload } from "../validators/validateFileupload.js";
+
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
 
 const uploadFileRouter = Router();
 uploadFileRouter.get("/", uploadFilePage);
