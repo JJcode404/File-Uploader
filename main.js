@@ -1,4 +1,5 @@
 import path from "node:path";
+import fs from "fs";
 import { fileURLToPath } from "node:url";
 import express from "express";
 import bcrypt from "bcryptjs";
@@ -19,13 +20,18 @@ import { uploadFileRouter } from "./routers/uploadFileRouter.js";
 import { uploadFolderRouter } from "./routers/uploadFolderRouter.js";
 import { deleteFile, downloadFile } from "./controllers/allfiles.js";
 import { deleteFolder, viewFolderFiles } from "./controllers/allfolders.js";
-import { isModifierLike } from "typescript";
 import { isAuthenticated } from "./controllers/checkAuthentication.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const assetsPath = path.join(__dirname, "public");
+
+const uploadPath = "./uploads";
+if (!fs.existsSync(uploadPath)) {
+  fs.mkdirSync(uploadPath, { recursive: true });
+  console.log("📁 'uploads' folder created.");
+}
 
 const app = express();
 app.set("views", path.join(__dirname, "views"));

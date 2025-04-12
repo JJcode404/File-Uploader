@@ -61,7 +61,7 @@ const uploadFile = async (req, res) => {
         filePath: result.secure_url,
         fileType: req.file.mimetype,
         fileSize: req.file.size,
-        folderId: folderId,
+        folderId: folderId || null,
       },
     });
 
