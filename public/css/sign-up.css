@@ -33,6 +33,10 @@ body {
   display: flex;
   flex-direction: column;
 }
+.input {
+  display: flex;
+  flex-direction: column;
+}
 
 .input label {
   font-size: 1rem;
@@ -42,7 +46,6 @@ body {
 }
 
 .input input {
-  width: 100%;
   padding: 12px;
   margin: 8px 0 16px;
   border: 1px solid #ddd;
@@ -102,4 +105,12 @@ a:hover {
 
 .validate input {
   border-color: #ddd;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+  list-style-type: none;
+  padding: 0;
+  text-align: center;
 }

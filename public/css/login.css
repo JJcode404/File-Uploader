@@ -16,7 +16,10 @@ body {
   max-width: 400px;
   width: 100%;
 }
-
+form {
+  display: flex;
+  flex-direction: column;
+}
 .details h2 {
   font-size: 2rem;
   color: #ff7f50;
@@ -37,7 +40,6 @@ label {
 }
 
 input {
-  width: 100%;
   padding: 12px;
   margin: 8px 0 16px;
   border: 1px solid #ddd;
@@ -77,16 +79,10 @@ a:hover {
   text-decoration: underline;
 }
 
-.errors {
+.flash-error {
   color: red;
   margin-top: 10px;
   list-style-type: none;
   padding: 0;
-}
-
-.errors li {
-  background-color: #ffefef;
-  padding: 8px;
-  margin-bottom: 5px;
-  border-radius: 5px;
+  text-align: center;
 }

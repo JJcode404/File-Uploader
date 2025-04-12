@@ -13,9 +13,9 @@ const authenticateUser = (req, res, next) => {
       return next(err);
     }
     if (!user) {
-      console.log("Authentication failed:", info ? info.message : "No info");
-      return res.status(400).render("login", {
-        error: info.message,
+      return res.render("login", {
+        username: info.username,
+        error: `${info.message}`,
       });
     }
     req.logIn(user, (loginErr) => {
