@@ -20,6 +20,7 @@ import { uploadFolderRouter } from "./routers/uploadFolderRouter.js";
 import { deleteFile, downloadFile } from "./controllers/allfiles.js";
 import { deleteFolder, viewFolderFiles } from "./controllers/allfolders.js";
 import { isModifierLike } from "typescript";
+import { isAuthenticated } from "./controllers/checkAuthentication.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -105,14 +106,14 @@ app.use("/", homeRouter);
 app.use("/sign-up", signRouter);
 app.use("/login", loginRouter);
 app.use("/comming-soon", commingSoonRouter);
-app.use("/files", allfilesRouter);
-app.use("/folders", allfolderRouter);
-app.use("/upload-file", uploadFileRouter);
-app.use("/upload-folder", uploadFolderRouter);
-app.use("/delete-file/:id", deleteFile);
-app.use("/download-file/:id", downloadFile);
-app.use("/delete-folder/:id", deleteFolder);
-app.use("/view/folder/:id", viewFolderFiles);
+app.use("/files", isAuthenticated, allfilesRouter);
+app.use("/folders", isAuthenticated, allfolderRouter);
+app.use("/upload-file", isAuthenticated, uploadFileRouter);
+app.use("/upload-folder", isAuthenticated, uploadFolderRouter);
+app.use("/delete-file/:id", isAuthenticated, deleteFile);
+app.use("/download-file/:id", isAuthenticated, downloadFile);
+app.use("/delete-folder/:id", isAuthenticated, deleteFolder);
+app.use("/view/folder/:id", isAuthenticated, viewFolderFiles);
 
 app.get("/logout", (req, res, next) => {
   req.logout((err) => {
