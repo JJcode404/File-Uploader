@@ -1,4 +1,5 @@
 import { prisma } from "../prisma.js";
+import path from "path";
 
 const allfilesPage = async (req, res) => {
   try {
@@ -53,7 +54,13 @@ const downloadFile = async (req, res) => {
       res.redirect("/files");
     }
 
-    const forceDownloadUrl = file.filePath + "?fl_attachment=true";
+    const downloadName = path.parse(file.fileName).name;
+
+    const forceDownloadUrl = file.filePath.replace(
+      "/upload/",
+      `/upload/fl_attachment:${downloadName}/`
+    );
+
     res.redirect(forceDownloadUrl);
   } catch (error) {
     req.flash("error", "❌ Failed to download file!");
